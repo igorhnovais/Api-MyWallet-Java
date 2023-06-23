@@ -1,6 +1,7 @@
 package com.mywallet.Api.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,16 @@ public class TransactionsService {
 
         BeanUtils.copyProperties(transactionDTO, transaction);
         ResponseEntity.status(HttpStatus.CREATED).body(repository.save(transaction));
+    }
+
+    public void update(Long id, TransactionDTO req){
+        Optional<Transaction> transaction = repository.findById(id);
+
+        if(transaction.isPresent()){
+            Transaction updatedTransaction = transaction.get();
+            updatedTransaction.setPrice(req.price());
+
+            repository.save(updatedTransaction);
+        }        
     }
 }
