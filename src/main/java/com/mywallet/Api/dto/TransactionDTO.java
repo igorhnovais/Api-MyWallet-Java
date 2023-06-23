@@ -7,6 +7,5 @@ import jakarta.validation.constraints.NotNull;
 
 public record TransactionDTO(
     @NotNull double price,
-    @NotNull String status,
     @NotNull int user_id
 ) {}
