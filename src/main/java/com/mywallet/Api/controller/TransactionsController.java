@@ -60,4 +60,12 @@ public class TransactionsController {
         return ResponseEntity.status(HttpStatus.CREATED)
         .body("criado com sucesso!");
     } 
+
+    @PostMapping("/new-exit")
+    public ResponseEntity<String> saveNewExit(@RequestBody @Valid TransactionDTO transactionDTO){
+        service.saveNewExit(transactionDTO);
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+        .body("criado com sucesso!");
+    } 
 }
