@@ -36,9 +36,16 @@ public class TransactionsService {
     }
 
     public void saveNewEntry(TransactionDTO transactionDTO){
-
         var transaction = new Transaction();
         transaction.setStatus("entry");
+
+        BeanUtils.copyProperties(transactionDTO, transaction);
+        ResponseEntity.status(HttpStatus.CREATED).body(repository.save(transaction));
+    }
+
+    public void saveNewExit(TransactionDTO transactionDTO){
+        var transaction = new Transaction();
+        transaction.setStatus("exit");
 
         BeanUtils.copyProperties(transactionDTO, transaction);
         ResponseEntity.status(HttpStatus.CREATED).body(repository.save(transaction));
